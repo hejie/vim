@@ -1,6 +1,4 @@
-# Rakefile
-#
-# Tasks for managing dot_vim.
+# 编译文件
 
 require 'open-uri'
 require 'openssl'
