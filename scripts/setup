@@ -1,6 +1,11 @@
+"=============================================================================
+" 作者: 何杰 (@hejie)
+" Description: The Vim Configuration
+" Version: 1.0
+" =============================================================================
+
 #!/usr/bin/env bash
-#
-# setup the Vim Configuration of Champions
+
 info () {
   printf "  [ \033[00;34m..\033[0m ] $1\n"
 }
@@ -16,7 +21,7 @@ fail () {
 }
 
 echo ''
-info 'Setting up the Vim Configuration of Champions'
+info '开始初始化'
 info '============================================='
 echo ''
 
@@ -24,7 +29,7 @@ info 'Installing Vundle'
 info '-----------------'
 git clone git://github.com/gmarik/vundle.git bundle/vundle
 
-info 'Setting up Symlinks'
+info '设置链接,也可以手动命令设置'
 info '--------------'
 if test $(which rake)
 then
@@ -47,4 +52,4 @@ else
   fi
 fi
 
-success 'Setup complete. Run vim and enjoy'
+success '欢迎使用～！'
