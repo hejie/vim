@@ -25,4 +25,7 @@ unlet g:vundle_installing_plugins
 
 call vundle#end()
 
-filetype plugin indent on
+" 开启文件类型侦测
+filetype on
+" 根据侦测到的不同类型加载对应的插件
+filetype plugin on

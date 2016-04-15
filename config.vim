@@ -4,6 +4,8 @@
 " Version: 1.0
 " =============================================================================
 
+" 定义快捷键的前缀，即 <Leader>
+let mapleader=";"
 " ---------------
 " Color
 " ---------------
@@ -25,6 +27,40 @@ if has('persistent_undo')
   set undofile
   set undodir=~/.vim/.undo
 endif
+
+" ---------------
+" 快捷键
+" ---------------
+" 定义快捷键到行首和行尾
+nmap LB 0
+nmap LE $
+" 设置快捷键将选中文本块复制至系统剪贴板
+vnoremap <Leader>y "+y
+" 设置快捷键将系统剪贴板内容粘贴至 vim
+nmap <Leader>p "+p
+" 定义快捷键关闭当前分割窗口
+nmap <Leader>q :q<CR>
+" 定义快捷键保存当前窗口内容
+nmap <Leader>w :w<CR>
+" 定义快捷键保存所有窗口内容并退出 vim
+nmap <Leader>wq :wa<CR>:q<CR>
+" 不做任何保存，直接退出 vim
+nmap <Leader>Q :qa!<CR>
+" 依次遍历子窗口
+nnoremap nw <C-W><C-W>
+" 跳转至右方的窗口
+nnoremap <Leader>lw <C-W>l
+" 跳转至左方的窗口
+nnoremap <Leader>hw <C-W>h
+" 跳转至上方的子窗口
+nnoremap <Leader>kw <C-W>k
+" 跳转至下方的子窗口
+nnoremap <Leader>jw <C-W>j
+" 定义快捷键在结对符之间跳转
+nmap <Leader>M %
+
+" 让配置变更立即生效
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
 " ---------------
 " UI
@@ -53,14 +89,13 @@ endif
 " ---------------
 " Behaviors
 " ---------------
-syntax enable
-" 允许用指定语法高亮配色方案替换默认方案
-syntax on
-set backup             " Turn on backups
-set autoread           " Automatically reload changes if detected
-set wildmenu           " Turn on WiLd menu
-" longest common part, then all.
-set wildmode=longest,full
+syntax enable          " 开启语法高亮功能
+syntax on              " 允许用指定语法高亮配色方案替换默认方案
+set backup             " 开启备份
+set autoread           " 设置当文件被外部改变的时候自动读入文件
+set nocompatible       " 不要使用vi的键盘模式，而是vim自己的
+set wildmenu           " vim 自身命令行模式智能补全
+set wildmode=longest,full " longest common part, then all.
 set hidden             " Change buffer - without saving
 set history=768        " Number of things to remember in history.
 set confirm            " Enable error files & error jumping.
@@ -76,13 +111,13 @@ set iskeyword+=\$,-   " Add extra characters that are valid parts of variables
 set nostartofline      " Don't go to the start of the line after some commands
 set scrolloff=3        " Keep three lines below the last line when scrolling
 set gdefault           " this makes search/replace global by default
-set switchbuf=useopen  " Switch to an existing buffer if one exists
-
+set switchbuf=useopen  " 显示已打开窗口，快速修复缓冲区，而不是打开新文件
 " ---------------
 " Text Format
 " ---------------
 " 自适应不同语言的智能缩进
 filetype indent on
+set nocp
 " 将制表符扩展为空格
 set expandtab
 " 设置编辑时制表符占用空格数
@@ -109,9 +144,9 @@ set smarttab
 " ---------------
 " Searching
 " ---------------
-set ignorecase " Case insensitive search
+set ignorecase " 搜索时大小写不敏感
 set smartcase  " Non-case sensitive search
-set incsearch  " Incremental search
+set incsearch  " 开启实时搜索功能
 set hlsearch   " Highlight search results
 set wildignore+=*.o,*.obj,*.exe,*.so,*.dll,*.pyc,.svn,.hg,.bzr,.git,
   \.sass-cache,*.class,*.scssc,*.cssc,sprockets%*,*.lessc,*/node_modules/*,
@@ -144,15 +179,21 @@ set listchars+=precedes:<
 " ---------------
 " Sounds
 " ---------------
+" 去掉输入错误的提示声音
 set noerrorbells
 set novisualbell
 set t_vb=
+set tm=500
 
 " ---------------
 " Mouse
 " ---------------
-set mousehide  " Hide mouse after chars typed
-set mouse=a    " Mouse in all modes
+" 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）
+set mouse=a
+set mouse=v
+
+"光标移动到无效位置
+set virtualedit=all
 
 " Better complete options to speed it up
 set complete=.,w,b,u,U
@@ -160,6 +201,8 @@ set complete=.,w,b,u,U
 
 " 补全功能在注释中同样有效
 let g:ycm_complete_in_comments=1
+"在字符串输入中也能补全
+let g:ycm_complete_in_strings = 1
 " 允许 vim 加载 .ycm_extra_conf.py 文件，不再提示
 let g:ycm_confirm_extra_conf=0
 " 开启 YCM 标签补全引擎
@@ -175,10 +218,17 @@ let g:ycm_cache_omnifunc=0
 " 语法关键字补全
 let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-
+" 注释和字符串中的文字也会被收入补全
+let g:ycm_collect_identifiers_from_comments_and_strings = 0
+let g:clang_user_options='|| exit 0'
+" 跳转到定义处
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" 补全 C 语言全局函数问题
+let g:ycm_key_invoke_completion = '<C-a>'
 
 " 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
 nmap <Leader>fl :NERDTreeToggle<CR>
+
 " 默认启动
 autocmd vimenter * NERDTree
 autocmd StdinReadPre * let s:std_in=1
@@ -218,5 +268,21 @@ call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
 call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
 call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+
+
+" 快捷键
+" map <SPACE> <Plug>(wildfire-fuel)
+" vmap <S-SPACE> <Plug>(wildfire-water)
+" 适用于哪些结对符
+" let g:wildfire_objects = ["i'", 'i"', "i)", "i]", "i}", "i>", "ip"]
+
+
+" 模板补全
+let g:UltiSnipsExpandTrigger="<leader><tab>"
+let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
+let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
+let g:UltiSnipsSnippetsDir = '~/.vim/custom-snippets'
+let g:UltiSnipsSnippetDirectories = ["UltiSnips", "custom-snippets"]
+
 
 
