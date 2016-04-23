@@ -89,6 +89,7 @@ endif
 " ---------------
 " Behaviors
 " ---------------
+set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
 syntax enable          " 开启语法高亮功能
 syntax on              " 允许用指定语法高亮配色方案替换默认方案
 set backup             " 开启备份
@@ -100,7 +101,7 @@ set hidden             " Change buffer - without saving
 set history=768        " Number of things to remember in history.
 set confirm            " Enable error files & error jumping.
 set clipboard+=unnamed " Yanks go on clipboard instead.
-set autowrite          " Writes on make/shell commands
+set autowrite          " 自动保存
 set timeoutlen=400     " Time to wait for a command (after leader for example).
 set ttimeout
 set ttimeoutlen=100    " Time to wait for a key sequence.
@@ -155,11 +156,11 @@ set wildignore+=*.o,*.obj,*.exe,*.so,*.dll,*.pyc,.svn,.hg,.bzr,.git,
 " ---------------
 " Visual
 " ---------------
-set showmatch   " Show matching brackets.
-set matchtime=2 " How many tenths of a second to blink
+set showmatch   " 高亮显示匹配的括号
+set matchtime=1 " 匹配括号高亮的时间(单位是十分之一秒)
 " Show invisible characters
 set list
-
+set smartindent " 为C程序提供自动缩进
 " Show trailing spaces as dots and carrots for extended lines.
 " From Janus, http://git.io/PLbAlw
 
@@ -190,7 +191,8 @@ set tm=500
 " ---------------
 " 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）
 set mouse=a
-set mouse=v
+set selection=exclusive
+set selectmode=mouse,key " 鼠标和shift加特殊键选区算选择模式，不是可视模式
 
 "光标移动到无效位置
 set virtualedit=all
@@ -225,6 +227,12 @@ let g:clang_user_options='|| exit 0'
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " 补全 C 语言全局函数问题
 let g:ycm_key_invoke_completion = '<C-a>'
+
+" 基于语义的声明/定义跳转
+nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
 
 " 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
 nmap <Leader>fl :NERDTreeToggle<CR>
@@ -284,5 +292,16 @@ let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
 let g:UltiSnipsSnippetsDir = '~/.vim/custom-snippets'
 let g:UltiSnipsSnippetDirectories = ["UltiSnips", "custom-snippets"]
 
+
+" C，C++ 按F5编译运行调试
+nnoremap <F5>   <Esc>:w<CR>:!g++ -std=c++11 % -o /tmp/a.out && /tmp/a.out<CR>
+nnoremap <F7>   <Esc>:w<CR>:!g++ -std=c++11 %<CR>
+nnoremap <C-F5> <Esc>:w<CR>:!g++ -std=c++11 -g % -o /tmp/a.out && gdb /tmp/a.out<CR>
+
+" 格式化代码
+let g:formatdef_harttle = '"astyle --style=attach --pad-oper"'
+let g:formatters_cpp = ['harttle']
+let g:formatters_java = ['harttle']
+noremap <F3> :Autoformat<CR>
 
 
