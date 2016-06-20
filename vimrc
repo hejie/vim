@@ -10,3 +10,5 @@ source ~/.vim/vundle.vim
 source ~/.vim/platforms.vim
 " 通用配置.
 source ~/.vim/config.vim
+" 编译和链接.
+source ~/.vim/acm.vim

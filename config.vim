@@ -65,9 +65,11 @@ autocmd BufWritePost $MYVIMRC source $MYVIMRC
 " ---------------
 " UI
 " ---------------
+set lines=48 columns=120 " 设定窗口大小
+set cc=80
 set ruler          " 显示光标当前位置
 set number         " 开启行号显示
-set nowrap         " Line wrapping off
+set nowrap         " 禁止自动换行
 set laststatus=2   " 总是显示状态栏
 set cmdheight=2    " Make the command area two lines high
 set cursorline     " 高亮显示当前行/列
@@ -102,23 +104,27 @@ set history=768        " Number of things to remember in history.
 set confirm            " Enable error files & error jumping.
 set clipboard+=unnamed " Yanks go on clipboard instead.
 set autowrite          " 自动保存
+set nobackup           " 禁止生成临时文件
 set timeoutlen=400     " Time to wait for a command (after leader for example).
 set ttimeout
 set ttimeoutlen=100    " Time to wait for a key sequence.
 set nofoldenable       " Disable folding entirely.
 set foldlevelstart=99  " I really don't like folds.
 set formatoptions=crql
-set iskeyword+=\$,-   " Add extra characters that are valid parts of variables
+set iskeyword+=\$,-    " Add extra characters that are valid parts of variables
 set nostartofline      " Don't go to the start of the line after some commands
 set scrolloff=3        " Keep three lines below the last line when scrolling
 set gdefault           " this makes search/replace global by default
 set switchbuf=useopen  " 显示已打开窗口，快速修复缓冲区，而不是打开新文件
+" set autochdir          " 自动改变当前目录
+
+
 " ---------------
 " Text Format
 " ---------------
 " 自适应不同语言的智能缩进
 filetype indent on
-set nocp
+set nocp " 关闭vi兼容模式
 " 将制表符扩展为空格
 set expandtab
 " 设置编辑时制表符占用空格数
@@ -298,10 +304,12 @@ nnoremap <F5>   <Esc>:w<CR>:!g++ -std=c++11 % -o /tmp/a.out && /tmp/a.out<CR>
 nnoremap <F7>   <Esc>:w<CR>:!g++ -std=c++11 %<CR>
 nnoremap <C-F5> <Esc>:w<CR>:!g++ -std=c++11 -g % -o /tmp/a.out && gdb /tmp/a.out<CR>
 
+
 " 格式化代码
 let g:formatdef_harttle = '"astyle --style=attach --pad-oper"'
 let g:formatters_cpp = ['harttle']
 let g:formatters_java = ['harttle']
 noremap <F3> :Autoformat<CR>
+inoremap <F3> <Esc>:Autoformat<CR> " 插入模式格式化
 
 
