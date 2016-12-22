@@ -1,15 +1,7 @@
-"=============================================================================
-
-" 作者: 何杰 (@hejie)
-" Description: The Vim Configuration
-" Version: 1.0
-
-" =============================================================================
-
 ## 安装说明
 
 - **1** 首先，安装所有必备库，包括Git。对于类似Debian的Linux发行版（如Ubuntu），将是以下内容：
-``` python 
+```ruby 
 
  sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
     libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
@@ -18,3 +10,8 @@
 
 ```
 在Ubuntu 16.04上，liblua5.1-dev是lua dev包名称，不是lua5.1-dev。
+
+
+## 反馈与建议
+- 微信公众号：ylct__
+- 邮箱：<hj7.com@gmail.com>
