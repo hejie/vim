@@ -23,7 +23,43 @@ $ sudo ./scripts/setup
 ```
 >**ps：** 如果出现安装失败，可以检查plugins 里面的路径是否正确，或者可能超时导致，进行重试。
 
-- **3**
+- **3** Install YCM
+git submodule update --init --recursive
+sudo apt-get install cmake
+
+
+- **4** 安装YouCompleteMe
+```ruby
+ 
+$ cd ~
+$ mkdir ycm_build
+$ cd ycm_build
+$ cmake -G "Unix Makefiles" . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+
+```
+- **5** 下载和编译llvm & clang http://releases.llvm.org/download.html
+1. 把下载好的llvm 和 clang 分别解压存放到新建文件夹llvm和clang，然后在把clang文件存放到 llvm/tools
+2. 编译llvm和clang，详细步骤请到http://clang.llvm.org/get_started.html
+```ruby
+
+$ mkdir build (in-tree build is not supported)
+$ cd build
+$ cmake -G "Unix Makefiles" ../llvm
+$ make
+
+```
+3. 下载Pre-Built Binaries (clang+llvm-3.9.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz) 
+并且解压到 ~/ycm_temp/llvm_root_dir
+```ruby
+
+$ cd ycm_build
+$ cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=~/ycm_temp/llvm_root_dir . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+$ cmake --build . --target ycm_core --config Release
+
+```
+>**ps：** --config Release部分特定于Windows，在Unix操作系统上将被忽略。
+
+
 
 ### 反馈与建议
 - 微信公众号：ylct__
