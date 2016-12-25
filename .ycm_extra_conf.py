@@ -65,6 +65,11 @@ flags = [
 '/usr/include',
 '-isystem',
 '/usr/include/c++/5',
+'-isystem',
+'/usr/include/c++/5.4.0',
+'-isystem',
+'/usr/include',
+'/usr/include/x86_64-linux-gnu/c++'
 # This path will only work on OS X, but extra paths that don't exist are not
 # harmful
 '/System/Library/Frameworks/Python.framework/Headers',
@@ -185,7 +190,4 @@ def FlagsForFile( filename, **kwargs ):
     relative_to = DirectoryOfThisScript()
     final_flags = MakeRelativePathsInFlagsAbsolute( flags, relative_to )
 
-  return {
-    'flags': final_flags,
-    'do_cache': True
-  }
+  return { 'flags': final_flags }
