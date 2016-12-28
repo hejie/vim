@@ -12,6 +12,12 @@ $ sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
 >**ps：** 在Ubuntu 16.04上，liblua5.1-dev是lua dev包名称，不是lua5.1-dev。
 请确认 vim 版本是7.4 + ，并且支持Python,通过命令测试 :echo has('python') || has('python3')
 如果结果是1则支持，否则不支持。
+检查python 
+$ vim --version | grep python
+如果需要换成对python2的支持
+$ sudo apt-get install vim-nox-py2
+可以切换不同的python，输入编号切换就可以了
+$ sudo update-alternatives --config vim
 
 - **2** clone code,把clone后的代码vim目录改为.vim 并且执行下面命令进行安装：
  
@@ -74,6 +80,7 @@ $ make VIMRUNTIMEDIR=/usr/share/vim/vim80
 $ sudo make install
 
 ```
+
 ### 反馈与建议
 - 微信公众号：ylct__
 - 邮箱：<hj7.com@gmail.com>
