@@ -66,10 +66,8 @@ flags = [
 '-isystem',
 '/usr/include/c++/5',
 '-isystem',
-'/usr/include/c++/5.4.0',
-'-isystem',
 '/usr/include',
-'/usr/include/x86_64-linux-gnu/c++'
+'/usr/include/x86_64-linux-gnu/c++',
 # This path will only work on OS X, but extra paths that don't exist are not
 # harmful
 '/System/Library/Frameworks/Python.framework/Headers',

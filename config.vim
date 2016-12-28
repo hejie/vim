@@ -226,6 +226,7 @@ let g:ycm_cache_omnifunc=0
 " 语法关键字补全
 let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_server_python_interpreter = '/usr/bin/python'
 " 注释和字符串中的文字也会被收入补全
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
 let g:clang_user_options='|| exit 0'
@@ -245,8 +246,12 @@ nmap <Leader>fl :NERDTreeToggle<CR>
 
 " 默认启动
 autocmd vimenter * NERDTree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" 打开NERDTree
+wincmd w 
+autocmd VimEnter * wincmd w
+" 光标默认在主窗口
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
+" vim 退出时直接关闭NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 let g:NERDTreeDirArrowExpandable = '▸'

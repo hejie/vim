@@ -7,11 +7,13 @@
 set nocompatible " be iMproved
 filetype off     " required!  　
 
-set runtimepath+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/vundle'
+if exists('g:vundle_installing_plugins')
+  Plugin 'VundleVim/Vundle.vim'
+  finish
+endif
 
 " 引用插件
 let g:vundle_installing_plugins = 1
