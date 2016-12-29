@@ -10,10 +10,12 @@ let mapleader=";"
 " Color
 " ---------------
 set background=dark
-colorscheme lucius
+colorscheme molokai
+let g:molokai_original = 1
+let g:rehash256 = 1
 " Force 256 color mode if available
 if $TERM =~ '-256color'
-   set t_Co=256
+set t_Co=256
 endif
 
 " -----------------------------
@@ -38,6 +40,8 @@ nmap LE $
 vnoremap <Leader>y "+y
 " 设置快捷键将系统剪贴板内容粘贴至 vim
 nmap <Leader>p "+p
+nmap <Leader>sw :sp<CR>
+nmap <Leader>vw :vs<CR>
 " 定义快捷键关闭当前分割窗口
 nmap <Leader>q :q<CR>
 " 定义快捷键保存当前窗口内容

@@ -4,6 +4,10 @@
 # Version: 1.0
 # =============================================================================
 
+# Rakefile
+#
+# Tasks for managing dot_vim.
+
 require 'open-uri'
 require 'openssl'
 require 'rubygems'
@@ -16,11 +20,11 @@ README_FILE = 'README.md'
 VUNDLE_PLUGINS_FOLDER = 'vundle_plugins'
 LINES_WITHOUT_CONFIG = 4
 PLUGINS_HEADER = <<-HEADER.chomp
-| Stars___ | **Plugin** | **Description** |
-| -------: | :--------- | :-------------- |
+| Stars#{9.times.map{'&nbsp;'}.join('')} | **Plugin** | **Description** |
+| :------- | :--------- | :-------------- |
 HEADER
 
-FILES_TO_LINK = %w{vimrc gvimrc nvimrc}
+FILES_TO_LINK = %w{vimrc gvimrc}
 
 task :default => ['vim:link']
 
@@ -36,6 +40,14 @@ namespace :vim do
           File.symlink(".vim/#{file}", dot_file)
           puts "Created link for #{file} in your home folder."
         end
+      end
+      neovim_config_file = File.expand_path("~/.vim/nvimrc");
+      neovim_dot_file = File.expand_path("~/.config/nvim/init.vim")
+      if File.exists? neovim_dot_file
+          puts "#{neovim_dot_file} already exists, skipping link."
+        else
+          File.symlink(neovim_config_file, neovim_dot_file)
+          puts "Created link for nvimrc in your home folder."
       end
     rescue NotImplementedError
       puts "File.symlink not supported, you must do it manually."
@@ -157,9 +169,9 @@ def fetch_plugin_info(vundle_link)
   info[:config_file] = "#{VUNDLE_PLUGINS_FOLDER}/#{info[:config_file_name]}"
 
   plugin_info = repo_info(github_user, github_repo)
-  info[:description] = plugin_info['description'].strip
+  info[:description] = plugin_info['description'] && plugin_info['description'].strip
   info[:stars] = plugin_info['stargazers_count']
-  info[:stars_text] = "#{comma_number(plugin_info['stargazers_count'])} ★"
+  info[:stars_text] = "★ #{comma_number(plugin_info['stargazers_count'])}"
 
   info
 end
