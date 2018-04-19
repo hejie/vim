@@ -1,0 +1,32 @@
+" EverVim Appearance Bundles
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+if exists('g:evervim_use_lightline')
+    Plug 'itchyny/lightline.vim'
+    Plug 'taohex/lightline-buffer'
+else
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+endif
+Plug 'mhinz/vim-startify'
+" Make sure we run devicons after the above
+if !TERMUX() && !exists('g:evervim_no_patched_fonts')
+    Plug 'ryanoasis/vim-devicons'
+endif
+if exists('g:evervim_minimap')
+    Plug 'severin-lemaignan/vim-minimap'
+endif
+" Additional Color Schemes
+" Some of them are already included in the vim-colorscheme pack
+" But just missing the airline/lightline color
+Plug 'tomasiser/vim-code-dark'
+Plug 'altercation/vim-colors-solarized'
+Plug 'spf13/vim-colors'
+Plug 'flazz/vim-colorschemes'
+Plug 'joshdick/onedark.vim'
+Plug 'rakr/vim-one'
+Plug 'morhetz/gruvbox'
+Plug 'reedes/vim-colors-pencil'
+Plug 'liuchengxu/space-vim-dark'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'nightsense/vimspectr'
+Plug 'noahfrederick/vim-noctu'
