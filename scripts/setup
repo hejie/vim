@@ -25,17 +25,24 @@ info '开始初始化'
 info '============================================='
 echo ''
 
-info '设置链接,也可以手动命令设置'
-info '--------------'
-if test $(which rake)
-then
-  rake vim:link
-else
-  fail 'Install Ruby and Rake to continue'
-fi
+
+echo 'vim Config ...'
+mkdir -p $HOME/.config/
+
+ln -sfnv $HOME/vim ~/.vim
+ln -sfnv $HOME/vim $HOME/.config/nvim
+ln -sfnv $HOME/vim/vimrc $HOME/.vim/init.vim
+ln -sfnv $HOME/vim/vimrc $HOME/.vimrc
+ln -sfnv $HOME/.vimrc $HOME/.config/nvim/init.vim
+
 
 info 'Installing plugins'
 info '-------------------------------------------------'
+
+echo 'Downloading Vim-Plug'
+curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 if test $(which mvim)
 then
   mvim -v +PluginInstall +qall

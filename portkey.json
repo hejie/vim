@@ -1,6 +1,0 @@
-{
-  "portkeys": [],
-  "plugins/*.vim": {
-    "type": "plugin"
-  }
-}

@@ -6,17 +6,6 @@
 
 " 定义快捷键的前缀，即 <Leader>
 let mapleader=";"
-" ---------------
-" Color
-" ---------------
-set background=dark
-colorscheme molokai
-let g:molokai_original = 1
-let g:rehash256 = 1
-" Force 256 color mode if available
-if $TERM =~ '-256color'
-set t_Co=256
-endif
 
 " -----------------------------
 " File Locations
@@ -211,6 +200,7 @@ set virtualedit=all
 set complete=.,w,b,u,U
 
 
+
 " 补全功能在注释中同样有效
 let g:ycm_complete_in_comments=1
 "在字符串输入中也能补全
@@ -229,8 +219,7 @@ let g:ycm_min_num_of_chars_for_completion=1
 let g:ycm_cache_omnifunc=0
 " 语法关键字补全
 let g:ycm_seed_identifiers_with_syntax=1
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-let g:ycm_server_python_interpreter = '/usr/bin/python'
+let g:ycm_global_ycm_extra_conf = '~/vim/ycm_global_conf.py'
 " 注释和字符串中的文字也会被收入补全
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
 let g:clang_user_options='|| exit 0'
@@ -238,6 +227,9 @@ let g:clang_user_options='|| exit 0'
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " 补全 C 语言全局函数问题
 let g:ycm_key_invoke_completion = '<C-a>'
+
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
 
 " 基于语义的声明/定义跳转
 nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
@@ -278,19 +270,7 @@ function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction
 
-call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
-call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+
 
 
 " 快捷键
@@ -304,7 +284,7 @@ call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 let g:UltiSnipsExpandTrigger="<leader><tab>"
 let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
 let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
-let g:UltiSnipsSnippetsDir = '~/.vim/custom-snippets'
+let g:UltiSnipsSnippetsDir = '~/vim/custom-snippets'
 let g:UltiSnipsSnippetDirectories = ["UltiSnips", "custom-snippets"]
 
 

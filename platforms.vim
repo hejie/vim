@@ -3,6 +3,21 @@
 " Description: The Vim Configuration
 " Version: 1.0
 " =============================================================================
+silent function! WINDOWS()
+    return  (has('win32') || has('win64'))
+endfunction
+
+silent function! NVIM()
+    return has('nvim')
+endfunction
+
+silent function! ONI()
+    return exists('g:gui_oni')
+endfunction
+
+function! EverVimBundleDir(bundlename)
+    return $HOME . "/vim/bundle/" . a:bundlename
+endfunction
 
 if has('win32') || has('win64')
   " Windows

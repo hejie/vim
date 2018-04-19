@@ -1,4 +1,4 @@
 if exists('g:vundle_installing_plugins')
-  Plugin 'Raimondi/delimitMate'
+  Plug 'Raimondi/delimitMate'
   finish
 endif
