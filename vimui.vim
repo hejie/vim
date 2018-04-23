@@ -33,7 +33,7 @@ endif
 set tabpagemax=15                                      " Only show 15 tabs
 set showmode                                           " Display the current mode
 
-set cursorline                                         " Highlight current line
+set cursorline                                         " 高亮显示当前行/列
 "set cursorcolumn                                      " Highlight current column
 
 highlight clear SignColumn                             " SignColumn should match background
@@ -41,13 +41,13 @@ highlight clear LineNr                                 " Current line number row
 "highlight clear CursorLineNr                          " Remove highlight color from current line number
 
 if has('cmdline_info')
-    set ruler                                          " Show the ruler
+    set ruler                                          " 显示光标当前位置
     set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
     set showcmd                                        " Show partial commands in status line and Selected characters/lines in visual mode
 endif
 
 if has('statusline')
-    set laststatus=2
+    set laststatus=2                                   " 总是显示状态栏
 
     " Broken down into easily includeable segments
     set statusline=%<%f\                         " Filename
@@ -60,14 +60,11 @@ endif
 set backspace=indent,eol,start            " Backspace for dummies
 set linespace=0                           " No extra spaces between rows
 if !exists('g:evervim_hybrid_linenumber')
-    set number                            " Line numbers on
+    set number                            " 开启行号显示
 else
     set relativenumber
     set number
 endif
-set showmatch                   " Show matching brackets/parenthesis
-set incsearch                   " Find as you type search
-set hlsearch                    " Highlight search terms
 set winminheight=0              " Windows can be 0 line high
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
@@ -85,4 +82,12 @@ set listchars=tab:\│\ ,trail:•,extends:#,nbsp:· " Highlight problematic whi
 if exists('g:evervim_80_column_warning')
     highlight ColorColumn ctermbg=magenta guibg=magenta
     call matchadd('ColorColumn', '\%81v[^\n]', 100)
+endif
+
+" Disable tooltips for hovering keywords in Vim
+if exists('+ballooneval')
+  " This doesn't seem to stop tooltips for Ruby files
+  set noballooneval
+  " 100 second delay seems to be the only way to disable the tooltips
+  set balloondelay=100000
 endif

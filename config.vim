@@ -55,31 +55,6 @@ nmap <Leader>M %
 " 让配置变更立即生效
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
-" ---------------
-" UI
-" ---------------
-set lines=48 columns=120 " 设定窗口大小
-set cc=80
-set ruler          " 显示光标当前位置
-set number         " 开启行号显示
-set nowrap         " 禁止自动换行
-set laststatus=2   " 总是显示状态栏
-set cmdheight=2    " Make the command area two lines high
-set cursorline     " 高亮显示当前行/列
-set cursorcolumn
-set encoding=utf-8
-set noshowmode     " Don't show the mode since Powerline shows it
-set title          " Set the title of the window in the terminal to the file
-if exists('+colorcolumn')
-  set colorcolumn=80 " Color the 80th column differently as a wrapping guide.
-endif
-" Disable tooltips for hovering keywords in Vim
-if exists('+ballooneval')
-  " This doesn't seem to stop tooltips for Ruby files
-  set noballooneval
-  " 100 second delay seems to be the only way to disable the tooltips
-  set balloondelay=100000
-endif
 
 " ---------------
 " Behaviors
