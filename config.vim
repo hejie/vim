@@ -18,6 +18,7 @@ if has('persistent_undo')
   set undofile
   set undodir=~/.vim/.undo
 endif
+set title          " 将终端窗口的标题设置为该文件
 
 " ---------------
 " 快捷键
@@ -54,6 +55,7 @@ nmap <Leader>M %
 
 " 让配置变更立即生效
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
 
 
 " ---------------
