@@ -12,7 +12,7 @@ source $HOME/vim/platforms.vim
 source $HOME/vim/vundle.vim
 
 " 主题配置
-source $HOME/vim/vimui.vim
+source $HOME/vim/UI.vim
 
 " 通用配置.
 source $HOME/vim/config.vim
