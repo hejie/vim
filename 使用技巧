@@ -1,0 +1,2 @@
+普通用户启动的Vim保存需要root权限的文件
+:w !sudo tee %
